@@ -1,0 +1,648 @@
+{
+	"info": {
+		"_postman_id": "4675985a-1d0e-4db7-99da-b16b5499ca16",
+		"name": "E-commerce",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23215385"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "user registration",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"email\": \"vishnuedathottathil23456@gmail.com\",\r\n\"password\": \"Vishnu@23456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base url}}/user/signup",
+							"host": [
+								"{{base url}}"
+							],
+							"path": [
+								"user",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"email\": \"vishnuedathottathil2345@gmail.com\",\r\n\"password\": \"Vishnu@2345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base url}}/user/login",
+							"host": [
+								"{{base url}}"
+							],
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"const jsonData = pm.response.json();\r",
+									"const count = jsonData.count;\r",
+									"console.log (count)\r",
+									"for(var i=0;i<count;i++)\r",
+									"{\r",
+									"if(jsonData.users[i].email==\"kiran15@gmail.com\")\r",
+									"{\r",
+									"var userid = jsonData.users[i]._id;\r",
+									"console.log (userid)\r",
+									"var deleted_email = jsonData.users[i].email;\r",
+									"console.log (deleted_email)\r",
+									"pm.environment.set(\"userid\", userid)\r",
+									"    }\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"email\": \"vishnuedathottathil2345@gmail.com\",\r\n\"password\": \"Vishnu@2345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base url}}/user",
+							"host": [
+								"{{base url}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete user by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzFiNGZmZDMxZmY1MDAwMTc4ODA2ZTIiLCJpYXQiOjE2NjI3MzQ4NzYsImV4cCI6MTY2MjgyMTI3Nn0.bCcU7d-3LPAzCIbV0ptux-BpeFIxljB9c-DDgFcDCc4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base url}}/user/631ae20031ff50001788066f",
+							"host": [
+								"{{base url}}"
+							],
+							"path": [
+								"user",
+								"631ae20031ff50001788066f"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "product",
+			"item": [
+				{
+					"name": "get all product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"const jsonData = pm.response.json();\r",
+									"const num  = jsonData.count;\r",
+									"console.log (num)\r",
+									"for (var i=0;i<num;i++)\r",
+									"{\r",
+									"if(jsonData.products[i].name==\"water bottle\");\r",
+									"{\r",
+									"var productsid = jsonData.products[i]._id;\r",
+									"console.log(productsid)\r",
+									"var products_name = jsonData.products[i].name;\r",
+									"console.log (products_name)\r",
+									"pm.environment.set(\"productsid\", productsid);\r",
+									"}\r",
+									"}   "
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzFhMmU1YjJlYzdmYTAwMTcyM2FhODMiLCJpYXQiOjE2NjI2NjA4MzYsImV4cCI6MTY2Mjc0NzIzNn0.dVTVfNJf29Bj1wJH8hc_vsKpXYHtbLRWDiTKODv1r18",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base url}}/products",
+							"host": [
+								"{{base url}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzFhMmU1YjJlYzdmYTAwMTcyM2FhODMiLCJpYXQiOjE2NjI2NjA4MzYsImV4cCI6MTY2Mjc0NzIzNn0.dVTVfNJf29Bj1wJH8hc_vsKpXYHtbLRWDiTKODv1r18",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"name\": \"string\",\r\n\"price\": 222\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base url}}/products",
+							"host": [
+								"{{base url}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get product by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzFhMmU1YjJlYzdmYTAwMTcyM2FhODMiLCJpYXQiOjE2NjI2NjA4MzYsImV4cCI6MTY2Mjc0NzIzNn0.dVTVfNJf29Bj1wJH8hc_vsKpXYHtbLRWDiTKODv1r18",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base url}}/products/631b55f831ff5000178806f7",
+							"host": [
+								"{{base url}}"
+							],
+							"path": [
+								"products",
+								"631b55f831ff5000178806f7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update product by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzFhMmU1YjJlYzdmYTAwMTcyM2FhODMiLCJpYXQiOjE2NjI2NjA4MzYsImV4cCI6MTY2Mjc0NzIzNn0.dVTVfNJf29Bj1wJH8hc_vsKpXYHtbLRWDiTKODv1r18",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n\"name\": \"string\",\r\n\"price\": 2234\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base url}}/products/631a32322ec7fa001723aa8b",
+							"host": [
+								"{{base url}}"
+							],
+							"path": [
+								"products",
+								"631a32322ec7fa001723aa8b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete product by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzFhMmU1YjJlYzdmYTAwMTcyM2FhODMiLCJpYXQiOjE2NjI2NjA4MzYsImV4cCI6MTY2Mjc0NzIzNn0.dVTVfNJf29Bj1wJH8hc_vsKpXYHtbLRWDiTKODv1r18",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n}"
+						},
+						"url": {
+							"raw": "{{base url}}/products/631a32322ec7fa001723aa8b",
+							"host": [
+								"{{base url}}"
+							],
+							"path": [
+								"products",
+								"631a32322ec7fa001723aa8b"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "orders",
+			"item": [
+				{
+					"name": "get all orders",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"const getallorders=pm.response.json();\r",
+									"const total=getallorders.count\r",
+									"let oid,name;\r",
+									"console.log(total);\r",
+									"for(let i=0;i<total;i++)\r",
+									"{\r",
+									"if(getallorders.orders[i].product!=null)\r",
+									"{\r",
+									"name=getallorders.orders[i].productname;\r",
+									"console.log(name);\r",
+									"if(name==\"mackbook pro\")\r",
+									"{\r",
+									"console.log(name);\r",
+									"oid=getallorders.orders[i]._id;\r",
+									"console.log[oid];\r",
+									"pm.environment.set(\"oid\",oid);\r",
+									"\t}\r",
+									"  }\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzFhMmU1YjJlYzdmYTAwMTcyM2FhODMiLCJpYXQiOjE2NjI2NjA4MzYsImV4cCI6MTY2Mjc0NzIzNn0.dVTVfNJf29Bj1wJH8hc_vsKpXYHtbLRWDiTKODv1r18",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base url}}/orders",
+							"host": [
+								"{{base url}}"
+							],
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzFhMmU1YjJlYzdmYTAwMTcyM2FhODMiLCJpYXQiOjE2NjI2NjA4MzYsImV4cCI6MTY2Mjc0NzIzNn0.dVTVfNJf29Bj1wJH8hc_vsKpXYHtbLRWDiTKODv1r18",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"product\":\"622a0c18b48d5a0017a5c311\",\r\n\"quantity\": 52\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base url}}/orders",
+							"host": [
+								"{{base url}}"
+							],
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get order by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzFhMmU1YjJlYzdmYTAwMTcyM2FhODMiLCJpYXQiOjE2NjI2NjA4MzYsImV4cCI6MTY2Mjc0NzIzNn0.dVTVfNJf29Bj1wJH8hc_vsKpXYHtbLRWDiTKODv1r18",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base url}}/orders/",
+							"host": [
+								"{{base url}}"
+							],
+							"path": [
+								"orders",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete order by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzFhMmU1YjJlYzdmYTAwMTcyM2FhODMiLCJpYXQiOjE2NjI2NjA4MzYsImV4cCI6MTY2Mjc0NzIzNn0.dVTVfNJf29Bj1wJH8hc_vsKpXYHtbLRWDiTKODv1r18",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base url}}/orders/631a38a02ec7fa001723aaa1",
+							"host": [
+								"{{base url}}"
+							],
+							"path": [
+								"orders",
+								"631a38a02ec7fa001723aaa1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
